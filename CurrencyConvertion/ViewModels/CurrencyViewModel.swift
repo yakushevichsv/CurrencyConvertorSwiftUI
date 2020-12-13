@@ -30,10 +30,18 @@ final class CurrencyViewModel: ObservableObject {
 
 //MARK: - API
 extension CurrencyViewModel {
-    private func loadCurrencies(){
+    private func startLoading() {
         loadingSubject = true
-        //loadingSubject.send(true)
-        
+        errorMessageSubject = nil
+    }
+    
+    private func endLoading(errorMessage message: String?) {
+        loadingSubject = false
+        errorMessageSubject = message
+    }
+    
+    private func loadCurrencies(){
+        startLoading()
         let publisher = currencyClient.currencies().map { (list) -> [CurrencyInfo] in
             let result = list.currencies.sorted { (tuple1, tuple2) -> Bool in
                 tuple1.key < tuple2.key
@@ -50,10 +58,7 @@ extension CurrencyViewModel {
             default:
                 message = nil
             }
-            self.loadingSubject.toggle()
-            //self.loadingSubject.send(false)
-            //self.errorMessageSubject.send(message)
-            self.errorMessageSubject = message
+            self.endLoading(errorMessage: message)
             self.currenciesOp = nil
         }, receiveValue: { [unowned self] (info) in
             self.currenciesInfo = info
