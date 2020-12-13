@@ -17,14 +17,12 @@ final class CurrencyViewModel: ObservableObject {
         }
     }
     @Published private (set)var currenciesInfo = [CurrencyInfo]()
-    @Published private (set)var errorMessageSubject: String? //= PassthroughSubject<String?, Never>()
-    @Published private (set)var loadingSubject: Bool //= PassthroughSubject<Bool, Never>()
+    @Published var errorMessageSubject: String? = nil
+    @Published var loadingSubject: Bool = false
     
     init(currencyClient: NetworkCurrencyType = NetworkClient.shared) {
         self.currencyClient = currencyClient
         setOp = .init()
-        loadingSubject = false
-        errorMessageSubject = nil
     }
 }
 
@@ -68,7 +66,7 @@ extension CurrencyViewModel {
     }
     
     func onViewWillAppear() {
-        guard loadingSubject == false else { return }
+        guard currenciesOp == nil else { return }
         loadCurrencies()
     }
 }

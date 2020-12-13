@@ -10,23 +10,25 @@ import SwiftUI
 struct CurrencyView: View {
     @ObservedObject var model = CurrencyViewModel()
     
-    
     var body: some View {
         ZStack {
-            ActivityIndicatorView(isAnimating: .init(get: { () -> Bool in
-                return model.loadingSubject
-            }, set: { (_) in }))
+            ActivityIndicatorView(isAnimating: .init(get: {
+                self.model.loadingSubject == true
+            }, set: { (newValue) in
+                
+            }))
             .frame(width: 50, height: 50)
             
             Text("Hello, world!")
                 .padding()
                 .onAppear(perform: model.onViewWillAppear)
-                .alert(isPresented: .init(get: { () -> Bool in
-                    return model.errorMessageSubject == nil
-                }, set: { (_) in
+                .alert(isPresented: .init(get: {
+                    self.model.errorMessageSubject?.isEmpty == false
+                }, set: { (value) in
+                    
                 }), content: {
                     Alert(title: Text("Error"),
-                          message: Text("Failed to load"),
+                          message: Text(self.model.errorMessageSubject!), //Text("Failed to load"),
                           dismissButton: .default(Text("OK")))
                 })
         }
