@@ -1,2 +1,3 @@
 # CurrencyConvertorSwiftUI
-Sample app for currencylayer.com
+Sample exchange rate app based on SwiftUI. 
+Rates are taken from https://currencylayer.com
