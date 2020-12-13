@@ -17,7 +17,7 @@ final class NetworkClient {
     let baseURL: URL
     let decoder: JSONDecoder
     
-    private init(baseURL: URL = URL(string: "https://api.currencylayer.com")!,
+    private init(baseURL: URL = URL(string: "http://api.currencylayer.com")!,
                  key: String = "f4b734bb620f367750a6c4fbb20dd029") {
         self.key = key
         self.baseURL = baseURL

@@ -59,6 +59,7 @@ extension CurrencyViewModel {
             self.endLoading(errorMessage: message)
             self.currenciesOp = nil
         }, receiveValue: { [unowned self] (info) in
+            debugPrint("!!! Info \(info)")
             self.currenciesInfo = info
         })
         currenciesOp = op

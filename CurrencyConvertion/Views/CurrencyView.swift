@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+//TODO: https://medium.com/@azamsharp/building-grid-layout-in-swiftui-bcd3bc9627af
 
 struct CurrencyView: View {
     @ObservedObject var model = CurrencyViewModel()
@@ -28,7 +29,7 @@ struct CurrencyView: View {
                     
                 }), content: {
                     Alert(title: Text("Error"),
-                          message: Text(self.model.errorMessageSubject!), 
+                          message: Text(self.model.errorMessageSubject!),
                           dismissButton: .default(Text("OK")))
                 })
         }
