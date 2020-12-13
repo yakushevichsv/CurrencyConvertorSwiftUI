@@ -66,7 +66,6 @@
 		21F6BED22586347C002F3D0D /* CurrencyConvertion */ = {
 			isa = PBXGroup;
 			children = (
-				21F6BEFD258661A1002F3D0D /* Extensions */,
 				21F6BEE325863492002F3D0D /* Services */,
 				21F6BEF9258652FB002F3D0D /* Models */,
 				21F6BEF1258649B7002F3D0D /* Views */,
@@ -137,13 +136,6 @@
 				21F6BEFA25865328002F3D0D /* CurrencyInfo.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		21F6BEFD258661A1002F3D0D /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
