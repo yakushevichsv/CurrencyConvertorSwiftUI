@@ -27,10 +27,13 @@ extension ErrorInfo: Decodable {
     enum CodingKeys: String, CodingKey {
         case code
         case info
+        case error
     }
     
     init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let containerTop = try decoder.container(keyedBy: CodingKeys.self)
+        let container = try containerTop.nestedContainer(keyedBy: CodingKeys.self,
+                                                         forKey: .error)
         let code = try container.decodeIfPresent(Int.self, forKey: .code)
         let info = try container.decodeIfPresent(String.self, forKey: .info)
         self.init(code: code,

@@ -19,7 +19,7 @@ struct CurrencyView: View {
             }))
             .frame(width: 50, height: 50)
             
-            Text("Hello, world!")
+            Text("")
                 .padding()
                 .onAppear(perform: model.onViewWillAppear)
                 .alert(isPresented: .init(get: {
@@ -28,7 +28,7 @@ struct CurrencyView: View {
                     
                 }), content: {
                     Alert(title: Text("Error"),
-                          message: Text(self.model.errorMessageSubject!), //Text("Failed to load"),
+                          message: Text(self.model.errorMessageSubject!), 
                           dismissButton: .default(Text("OK")))
                 })
         }

@@ -38,10 +38,13 @@ extension NetworkClient: NetworkCurrencyType {
         return session.dataTaskPublisher(for: url!).tryMap { [unowned self] (data, response) in
             let httpResponsePtr = response as? HTTPURLResponse
             
-            guard let httpResponse = httpResponsePtr, 200..<300 ~= httpResponse.statusCode else {
-                let errorInfo = (try? self.decoder.decode(ErrorInfo.self, from: data)) ?? .init(code: httpResponsePtr?.statusCode,
-                          info: String(data: data, encoding: .utf8))
+            if let errorInfo = try? self.decoder.decode(ErrorInfo.self, from: data) {
                 throw errorInfo
+            }
+            
+            guard let httpResponse = httpResponsePtr, httpResponse.statusCode == 200 else {
+                throw ErrorInfo(code: httpResponsePtr?.statusCode,
+                                info: String(data: data, encoding: .utf8))
             }
             do {
                 return try self.decoder.decode(CurrencyList.self, from: data)
